@@ -1,6 +1,7 @@
 import json
 from typing import Any
 from json_repair import repair_json
+from tqdm import tqdm
 from src.prompts import EVALUATION_PROMPT
 
 
@@ -51,9 +52,10 @@ class Evaluator:
         Returns:
             List of scores (0.0 to 1.0) for each sentence
         """
+        print(f"  Evaluating {len(sentences)} sentences...")
         scores = []
 
-        for sentence in sentences:
+        for sentence in tqdm(sentences, desc="  Evaluating", leave=False):
             # Run PII stripper model
             sanitized = self.model.run(prompt, sentence)
 
@@ -74,10 +76,11 @@ class Evaluator:
         Returns:
             Dict with 'scores', 'traces' containing detailed execution info
         """
+        print(f"  Evaluating {len(sentences)} sentences with traces...")
         scores = []
         traces = []
 
-        for sentence in sentences:
+        for sentence in tqdm(sentences, desc="  Evaluating", leave=False):
             # Run PII stripper model
             sanitized = self.model.run(prompt, sentence)
 

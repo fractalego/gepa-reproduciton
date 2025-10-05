@@ -21,7 +21,6 @@ class GepaOptimizer:
         train_sentences: list[str],  # Training set for minibatch mutation
         val_sentences: list[str],    # Validation set for Pareto fronts
         evaluator,
-        reflector,
         mutator,
         merger,
         rollouts_budget: int,
@@ -34,7 +33,6 @@ class GepaOptimizer:
             train_sentences: Training sentences for minibatch-based mutation
             val_sentences: Validation sentences for Pareto front tracking
             evaluator: Evaluator with evaluate_per_sentence() and evaluate_with_traces()
-            reflector: Reflector that generates feedback from evaluation results
             mutator: Mutator with mutate() method
             merger: Merger with merge() method
             rollouts_budget: Number of optimization iterations
@@ -77,9 +75,8 @@ class GepaOptimizer:
             parent_eval = evaluator.evaluate_with_traces(parent_prompt, minibatch)
             parent_minibatch_score = sum(parent_eval['scores'])
 
-            # Generate feedback and mutate
-            feedback = reflector.reflect(parent_prompt, parent_eval)
-            child_prompt = mutator.mutate(parent_prompt, feedback)
+            # Mutate based on evaluation results
+            child_prompt = mutator.mutate(parent_prompt, parent_eval)
             self._log_info("Generated mutated prompt")
 
             # Evaluate child on SAME minibatch (quick check)

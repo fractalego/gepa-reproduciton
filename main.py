@@ -19,7 +19,7 @@ def main():
     # Load datasets
     print("Loading datasets...")
     train_sentences = load_sentences('data/PII_train.json')
-    val_sentences = load_sentences('data/PII_dev.json')
+    val_sentences = load_sentences('data/PII_dev.json')[:5]  # Use only first 5 for testing
 
     print(f"Train set: {len(train_sentences)} sentences")
     print(f"Validation set: {len(val_sentences)} sentences")
@@ -47,7 +47,6 @@ def main():
         train_sentences=train_sentences,
         val_sentences=val_sentences,
         evaluator=evaluator,
-        reflector=None,  # We don't use reflector - mutator takes eval_results directly
         mutator=mutator,
         merger=merger,
         rollouts_budget=5,

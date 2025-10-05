@@ -1,0 +1,345 @@
+Loading datasets...
+Train set: 194 sentences
+Validation set: 5 sentences
+
+Initializing LLM client...
+Initializing components...
+
+Starting optimization with base prompt...
+================================================================================
+
+================================================================================
+  GEPA Prompt Optimization
+================================================================================
+
+  📝 Starting with Base Prompt:
+
+You are an algorithm that strip PII from texts. Your input is a sentence and your output is the sam...
+  Evaluating 5 sentences...
+  ✓ Base prompt validation score: 0.320
+
+  🏆 Current Pareto Front (1 prompts):
+     [0] Score: 0.320 | Pareto on 5 sentences
+
+────────────────────────────────────────────────────────────────────────────────
+  Iteration 1/5
+────────────────────────────────────────────────────────────────────────────────
+  ✓ Selected parent prompt [0] from Pareto front
+  ✓ Sampled 5 training examples for mutation
+  Evaluating 5 sentences with traces...
+  ✓ Generated mutated prompt
+  Evaluating 5 sentences with traces...
+  ✓ Minibatch scores - Parent: 2.500, Child: 4.500
+  ✓ ✨ Mutation improved on minibatch! Evaluating on validation set...
+  Evaluating 5 sentences...
+
+  📝 Accepted New Prompt:
+     Score: 0.960
+     ```
+You are a specialized algorithm designed to sanitize text by removing Personally Identifiable In...
+
+  🏆 Current Pareto Front (2 prompts):
+     [0] Score: 0.320 | Pareto on 0 sentences
+     [1] Score: 0.960 | Pareto on 5 sentences
+  ✓ 📅 Merge scheduled for next iteration
+
+────────────────────────────────────────────────────────────────────────────────
+  Iteration 2/5
+────────────────────────────────────────────────────────────────────────────────
+  ✓ 🔀 Attempting merge...
+  ✓ ❌ Merge skipped (same prompt selected twice)
+  ✓ Selected parent prompt [1] from Pareto front
+  ✓ Sampled 5 training examples for mutation
+  Evaluating 5 sentences with traces...
+  ✓ Generated mutated prompt
+  Evaluating 5 sentences with traces...
+  ✓ Minibatch scores - Parent: 3.800, Child: 4.800
+  ✓ ✨ Mutation improved on minibatch! Evaluating on validation set...
+  Evaluating 5 sentences...
+
+  📝 Accepted New Prompt:
+     Score: 0.960
+     ```
+You are an advanced algorithm designed to sanitize text by removing Personally Identifiable Info...
+
+  🏆 Current Pareto Front (3 prompts):
+     [0] Score: 0.320 | Pareto on 0 sentences
+     [1] Score: 0.960 | Pareto on 4 sentences
+     [2] Score: 0.960 | Pareto on 4 sentences
+  ✓ 📅 Merge scheduled for next iteration
+
+────────────────────────────────────────────────────────────────────────────────
+  Iteration 3/5
+────────────────────────────────────────────────────────────────────────────────
+  ✓ 🔀 Attempting merge...
+  ✓ ❌ Merge skipped (same prompt selected twice)
+  ✓ Selected parent prompt [1] from Pareto front
+  ✓ Sampled 5 training examples for mutation
+  Evaluating 5 sentences with traces...
+  ✓ Generated mutated prompt
+  Evaluating 5 sentences with traces...
+  ✓ Minibatch scores - Parent: 4.000, Child: 4.200
+  ✓ ✨ Mutation improved on minibatch! Evaluating on validation set...
+  Evaluating 5 sentences...
+
+  📝 Accepted New Prompt:
+     Score: 0.580
+     ```
+You are a specialized algorithm designed to sanitize text by removing Personally Identifiable In...
+
+  🏆 Current Pareto Front (4 prompts):
+     [0] Score: 0.320 | Pareto on 0 sentences
+     [1] Score: 0.960 | Pareto on 4 sentences
+     [2] Score: 0.960 | Pareto on 4 sentences
+     [3] Score: 0.580 | Pareto on 2 sentences
+  ✓ 📅 Merge scheduled for next iteration
+
+────────────────────────────────────────────────────────────────────────────────
+  Iteration 4/5
+────────────────────────────────────────────────────────────────────────────────
+  ✓ 🔀 Attempting merge...
+  ✓ Merging prompts [3] and [2]
+  Evaluating 5 sentences...
+
+  📝 ✨ Merged Prompt Accepted:
+     Score: 0.940
+     You are an advanced algorithm designed to sanitize text by removing Personally Identifiable Informat...
+
+  🏆 Current Pareto Front (5 prompts):
+     [0] Score: 0.320 | Pareto on 0 sentences
+     [1] Score: 0.960 | Pareto on 4 sentences
+     [2] Score: 0.960 | Pareto on 4 sentences
+     [3] Score: 0.580 | Pareto on 2 sentences
+     [4] Score: 0.940 | Pareto on 4 sentences
+
+────────────────────────────────────────────────────────────────────────────────
+  Iteration 5/5
+────────────────────────────────────────────────────────────────────────────────
+  ✓ 🔀 Attempting merge...
+  ✓ Merging prompts [1] and [2]
+  Evaluating 5 sentences...
+
+  📝 ✨ Merged Prompt Accepted:
+     Score: 0.740
+     You are an advanced algorithm specifically designed to sanitize text by removing Personally Identifi...
+
+  🏆 Current Pareto Front (6 prompts):
+     [0] Score: 0.320 | Pareto on 0 sentences
+     [1] Score: 0.960 | Pareto on 4 sentences
+     [2] Score: 0.960 | Pareto on 3 sentences
+     [3] Score: 0.580 | Pareto on 2 sentences
+     [4] Score: 0.940 | Pareto on 3 sentences
+     [5] Score: 0.740 | Pareto on 3 sentences
+
+================================================================================
+  Optimization Complete
+================================================================================
+
+  📝 Best Prompt Found:
+     Score: 0.960
+     ```
+You are a specialized algorithm designed to sanitize text by removing Personally Identifiable In...
+  ✓ Total prompts explored: 6
+  ✓ Total merges performed: 2
+
+================================================================================
+Optimization complete!
+
+Best prompt found:
+--------------------------------------------------------------------------------
+```
+You are a specialized algorithm designed to sanitize text by removing Personally Identifiable Information (PII). Your input will be a sentence containing potential PII, and your output must be a JSON object that retains the structure of the original sentence without any identifiable information.
+
+Here are detailed instructions for your task:
+
+1. Identify and remove any PII from the input sentence. PII includes, but is not limited to:
+   - Full names (e.g., "Emily Wilson", "Viola Burton", "Gloria Coleman")
+   - Email addresses (e.g., "emily.w@gmail.com", "evelyn.kelly@web.com")
+   - Phone numbers (e.g., "555-678-9019", "555-012-3457")
+   - Birth dates (e.g., "05/22/1982")
+   - Any other information that could identify an individual, such as social security numbers, addresses, etc.
+
+2. Ensure that the output retains the overall structure and meaning of the sentence as much as possible, while completely removing the PII. If the sentence contains phrases that imply a reference to the individual (e.g., "can be reached at", "my name is"), these should also be sanitized to eliminate any context that could lead back to the individual.
+
+3. Format the output strictly in JSON format with a single field "text" that contains the sanitized version of the input sentence. For example:
+   {
+     "text": "Sanitized text here"
+   }
+
+4. Do not include any placeholders, such as "[REDACTED]", or leave any parts of the sentence empty. The goal is to produce a natural-sounding sentence that does not reference any personal information.
+
+5. Provide only the JSON output; do not include any additional text or explanation.
+
+By adhering to these guidelines, you will ensure that the output is both functional and compliant with privacy standards.
+```
+--------------------------------------------------------------------------------
+
+Best prompt saved to best_prompt.txt
+(gepa) alce@celembribor:~/src/gepa$
+(gepa) alce@celembribor:~/src/gepa$
+(gepa) alce@celembribor:~/src/gepa$
+(gepa) alce@celembribor:~/src/gepa$
+(gepa) alce@celembribor:~/src/gepa$ python -m main
+Loading datasets...
+Train set: 194 sentences
+Validation set: 10 sentences
+
+Initializing LLM client...
+Initializing components...
+
+Starting optimization with base prompt...
+================================================================================
+
+================================================================================
+  GEPA Prompt Optimization
+================================================================================
+
+  📝 Starting with Base Prompt:
+
+You are an algorithm that strip PII from texts. Your input is a sentence and your output is the sam...
+  Evaluating on validation set (10 sentences)...
+  ✓ Base prompt validation score: 0.600
+
+  🏆 Current Pareto Front (1 prompts):
+     [0] Score: 0.600 | Pareto on 10 sentences: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+────────────────────────────────────────────────────────────────────────────────
+  Iteration 1/5
+────────────────────────────────────────────────────────────────────────────────
+  ✓ Selected parent prompt [0] from Pareto front
+  ✓ Sampled 5 training examples for mutation
+  Evaluating on train minibatch set (5 sentences with traces)...
+  ✓ Generated mutated prompt
+  Evaluating on train minibatch set (5 sentences with traces)...
+  ✓ Minibatch scores - Parent: 2.300, Child: 5.000
+  ✓ ✨ Mutation improved on minibatch! Evaluating on validation set...
+  Evaluating on validation set (10 sentences)...
+
+  📝 Accepted New Prompt:
+     Score: 1.000
+     ```
+You are an algorithm designed to identify and remove Personally Identifiable Information (PII) f...
+
+  🏆 Current Pareto Front (2 prompts):
+     [0] Score: 0.600 | Pareto on 3 sentences: [0, 5, 9]
+     [1] Score: 1.000 | Pareto on 10 sentences: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  ✓ 📅 Merge scheduled for next iteration
+
+────────────────────────────────────────────────────────────────────────────────
+  Iteration 2/5
+────────────────────────────────────────────────────────────────────────────────
+  ✓ 🔀 Attempting merge...
+  ✓ Merging prompts [0] and [1]
+  Generating merged prompt using LLM...
+  Evaluating on validation set (10 sentences)...
+
+  📝 ✨ Merged Prompt Accepted:
+     Score: 0.950
+     You are an algorithm designed to identify and remove Personally Identifiable Information (PII) from ...
+
+  🏆 Current Pareto Front (3 prompts):
+     [0] Score: 0.600 | Pareto on 3 sentences: [0, 5, 9]
+     [1] Score: 1.000 | Pareto on 10 sentences: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+     [2] Score: 0.950 | Pareto on 9 sentences: [0, 1, 2, 4, 5, 6, 7, 8, 9]
+
+────────────────────────────────────────────────────────────────────────────────
+  Iteration 3/5
+────────────────────────────────────────────────────────────────────────────────
+  ✓ Selected parent prompt [1] from Pareto front
+  ✓ Sampled 5 training examples for mutation
+  Evaluating on train minibatch set (5 sentences with traces)...
+  ✓ Generated mutated prompt
+  Evaluating on train minibatch set (5 sentences with traces)...
+  ✓ Minibatch scores - Parent: 5.000, Child: 4.800
+  ✓ ❌ Mutation rejected (no improvement on minibatch)
+
+────────────────────────────────────────────────────────────────────────────────
+  Iteration 4/5
+────────────────────────────────────────────────────────────────────────────────
+  ✓ Selected parent prompt [2] from Pareto front
+  ✓ Sampled 5 training examples for mutation
+  Evaluating on train minibatch set (5 sentences with traces)...
+  ✓ Generated mutated prompt
+  Evaluating on train minibatch set (5 sentences with traces)...
+  ✓ Minibatch scores - Parent: 4.900, Child: 5.000
+  ✓ ✨ Mutation improved on minibatch! Evaluating on validation set...
+  Evaluating on validation set (10 sentences)...
+
+  📝 Accepted New Prompt:
+     Score: 1.000
+     ```
+You are an algorithm specifically designed to identify and remove Personally Identifiable Inform...
+
+  🏆 Current Pareto Front (4 prompts):
+     [0] Score: 0.600 | Pareto on 3 sentences: [0, 5, 9]
+     [1] Score: 1.000 | Pareto on 10 sentences: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+     [2] Score: 0.950 | Pareto on 9 sentences: [0, 1, 2, 4, 5, 6, 7, 8, 9]
+     [3] Score: 1.000 | Pareto on 10 sentences: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  ✓ 📅 Merge scheduled for next iteration
+
+────────────────────────────────────────────────────────────────────────────────
+  Iteration 5/5
+────────────────────────────────────────────────────────────────────────────────
+  ✓ 🔀 Attempting merge...
+  ✓ Merging prompts [0] and [1]
+  Generating merged prompt using LLM...
+  Evaluating on validation set (10 sentences)...
+
+  📝 ✨ Merged Prompt Accepted:
+     Score: 1.000
+     You are an algorithm designed to identify and remove Personally Identifiable Information (PII) from ...
+
+  🏆 Current Pareto Front (5 prompts):
+     [0] Score: 0.600 | Pareto on 3 sentences: [0, 5, 9]
+     [1] Score: 1.000 | Pareto on 10 sentences: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+     [2] Score: 0.950 | Pareto on 9 sentences: [0, 1, 2, 4, 5, 6, 7, 8, 9]
+     [3] Score: 1.000 | Pareto on 10 sentences: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+     [4] Score: 1.000 | Pareto on 10 sentences: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+================================================================================
+  Optimization Complete
+================================================================================
+
+  📝 Best Prompt Found:
+     Score: 1.000
+     ```
+You are an algorithm designed to identify and remove Personally Identifiable Information (PII) f...
+  ✓ Total prompts explored: 5
+  ✓ Total merges performed: 2
+
+================================================================================
+Optimization complete!
+
+Best prompt found:
+--------------------------------------------------------------------------------
+```
+You are an algorithm designed to identify and remove Personally Identifiable Information (PII) from text sentences. Your goal is to produce a sanitized version of the input sentence where all identifiable information is replaced in a way that maintains the original structure and intent of the sentence as much as possible, while ensuring that no PII remains.
+
+### Task Description:
+1. **Input Format**: You will receive a single sentence that may contain various forms of PII, including but not limited to:
+   - Names (e.g., full names, first names)
+   - Email addresses
+   - Phone numbers
+   - Dates of birth
+   - Any other information that can be used to identify an individual.
+
+2. **Output Format**: Your output should be a JSON object containing a single field named "text". This field should contain the sanitized version of the input sentence, with all PII effectively removed or replaced, while ensuring that the overall meaning of the sentence remains intact.
+
+3. **Sanitization Guidelines**:
+   - Replace PII with generic placeholders where appropriate (e.g., "[NAME]", "[EMAIL]", "[PHONE]", or "[DATE]") to indicate that information has been removed, but do so only if it fits the structure of the sentence.
+   - Ensure that the resulting sentence does not imply the presence of PII (e.g., avoid phrases like "can be contacted at" if a contact method has been removed).
+   - Retain the grammatical integrity of the sentence, so that it still reads naturally without the PII.
+
+4. **Examples of PII**:
+   - Names: "John Doe" should be replaced with "[NAME]".
+   - Email: "john.doe@example.com" should be replaced with "[EMAIL]".
+   - Phone: "555-123-4567" should be replaced with "[PHONE]".
+   - Date of Birth: "01/01/1990" should be replaced with "[DATE]".
+
+5. **Scoring**: Your responses will be evaluated based on the completeness of PII removal and the preservation of the original sentence structure. Aim for an output that fully sanitizes the text without leaving any identifiable information or implications of such.
+
+Output only the JSON object and nothing else.
+```
+--------------------------------------------------------------------------------
+
+Best prompt saved to best_prompt.txt

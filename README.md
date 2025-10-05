@@ -6,7 +6,7 @@ The data in the `data/` folder is synthetic and generated for demonstration purp
 ## Key Concepts
 
 ### 1. Pareto Frontier
-The Pareto frontier tracks which prompts perform best on each validation sentence. A prompt is on the Pareto frontier for a sentence if no other prompt achieves a strictly better score on that sentence. Each sentence has its own Pareto front, and prompts appearing in many fronts are considered more robust.
+The Pareto frontier tracks which prompts perform best on each validation sentence. A prompt is Pareto-optimal on a sentence if it achieves the best score seen so far on that specific sentence. Each sentence maintains its own Pareto front (a set of prompt indices). When evaluating a new prompt: if it scores higher than the current best on a sentence, it replaces all previous prompts in that sentence's front; if it ties with the best, it is added to the front; if it scores lower, it is not included. Prompts appearing in many sentence Pareto fronts are considered more robust across diverse examples.
 
 ### 2. Dominated Prompts
 A prompt is dominated if, for every validation sentence where it appears in the Pareto front, there exists another prompt in that same front. Dominated prompts are filtered out during selection to focus on the most promising candidates.

@@ -75,8 +75,9 @@ class GepaOptimizer:
             parent_minibatch_score = sum(parent_eval['scores'])
 
             # Mutate based on evaluation results
+            self._log_info("Generating mutated prompt")
             child_prompt = mutator.mutate(parent_prompt, parent_eval)
-            self._log_info("Generated mutated prompt")
+            self._log_info("Mutated prompt generated!")
 
             # Evaluate child on SAME minibatch (quick check)
             child_eval = evaluator.evaluate_with_traces(child_prompt, minibatch, desc="train minibatch")

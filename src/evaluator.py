@@ -1,34 +1,7 @@
 import json
 from typing import Any
 from json_repair import repair_json
-
-
-EVALUATION_PROMPT = """
-You are an expert evaluator for PII (Personally Identifiable Information) stripping tasks.
-
-You will be given:
-1. An original sentence
-2. A sanitized version of that sentence
-
-Your task is to evaluate how well the PII was removed from the sentence.
-
-Original sentence: {original}
-Sanitized sentence: {sanitized}
-
-Evaluate the sanitization and provide:
-1. A score from 0.0 to 1.0 (where 1.0 means all PII was perfectly removed)
-2. List of PII that was successfully removed
-3. List of PII that was missed (still present in sanitized version)
-4. Brief feedback on the quality
-
-Respond ONLY with a JSON object in this format:
-{{
-  "score": 0.0-1.0,
-  "removed_pii": ["list", "of", "removed", "pii"],
-  "missed_pii": ["list", "of", "missed", "pii"],
-  "feedback": "brief explanation"
-}}
-"""
+from src.prompts import EVALUATION_PROMPT
 
 
 class Evaluator:

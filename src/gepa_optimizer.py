@@ -40,16 +40,15 @@ class GepaOptimizer:
         Returns:
             Best prompt string found
         """
-        # Initialize Pareto helper with VALIDATION set
-        pareto_helper = ParetoHelper(base_prompt, val_sentences)
-
-        # Evaluate base prompt on validation set and initialize Pareto fronts
+        # Evaluate base prompt on validation set
         self._log_header("GEPA Prompt Optimization")
         self._log_prompt("Starting with Base Prompt", base_prompt)
 
-        base_val_subscores = evaluator.evaluate_per_sentence(base_prompt, val_sentences)
+        base_val_subscores = evaluator.evaluate_per_sentence(base_prompt, val_sentences, desc="validation")
         base_score = sum(base_val_subscores) / len(base_val_subscores)
-        pareto_helper.update_with_new_prompt(base_prompt, base_val_subscores)
+
+        # Initialize Pareto helper with evaluated base prompt
+        pareto_helper = ParetoHelper(base_prompt, val_sentences, base_val_subscores)
 
         self._log_info(f"Base prompt validation score: {base_score:.3f}")
         self._log_pareto_front(pareto_helper)
@@ -72,7 +71,7 @@ class GepaOptimizer:
             self._log_info(f"Sampled {len(minibatch)} training examples for mutation")
 
             # Evaluate parent on minibatch with traces
-            parent_eval = evaluator.evaluate_with_traces(parent_prompt, minibatch)
+            parent_eval = evaluator.evaluate_with_traces(parent_prompt, minibatch, desc="train minibatch")
             parent_minibatch_score = sum(parent_eval['scores'])
 
             # Mutate based on evaluation results
@@ -80,7 +79,7 @@ class GepaOptimizer:
             self._log_info("Generated mutated prompt")
 
             # Evaluate child on SAME minibatch (quick check)
-            child_eval = evaluator.evaluate_with_traces(child_prompt, minibatch)
+            child_eval = evaluator.evaluate_with_traces(child_prompt, minibatch, desc="train minibatch")
             child_minibatch_score = sum(child_eval['scores'])
 
             self._log_info(f"Minibatch scores - Parent: {parent_minibatch_score:.3f}, Child: {child_minibatch_score:.3f}")
@@ -89,7 +88,7 @@ class GepaOptimizer:
             if child_minibatch_score > parent_minibatch_score:
                 # SUCCESS on minibatch! Now do full VALIDATION evaluation
                 self._log_info("✨ Mutation improved on minibatch! Evaluating on validation set...")
-                child_val_subscores = evaluator.evaluate_per_sentence(child_prompt, val_sentences)
+                child_val_subscores = evaluator.evaluate_per_sentence(child_prompt, val_sentences, desc="validation")
                 child_val_score = sum(child_val_subscores) / len(child_val_subscores)
 
                 pareto_helper.update_with_new_prompt(child_prompt, child_val_subscores)
@@ -141,8 +140,15 @@ class GepaOptimizer:
         """Log the current Pareto front."""
         print(f"\n  🏆 Current Pareto Front ({len(pareto_helper.prompt_candidates)} prompts):")
         for idx, score in enumerate(pareto_helper.per_prompt_scores):
-            num_sentences = sum(1 for front in pareto_helper.prompt_at_pareto_front_sentences if idx in front)
-            print(f"     [{idx}] Score: {score:.3f} | Pareto on {num_sentences} sentences")
+            # Find which sentences this prompt is Pareto-optimal on
+            pareto_sentences = [i for i, front in enumerate(pareto_helper.prompt_at_pareto_front_sentences) if idx in front]
+            num_sentences = len(pareto_sentences)
+
+            if num_sentences > 0:
+                sentences_str = str(pareto_sentences) if num_sentences <= 10 else f"{pareto_sentences[:10]}..."
+                print(f"     [{idx}] Score: {score:.3f} | Pareto on {num_sentences} sentences: {sentences_str}")
+            else:
+                print(f"     [{idx}] Score: {score:.3f} | Pareto on 0 sentences")
 
     def _merge_prompts_if_relevant(self, pareto_helper, evaluator, merger, val_sentences):
         """Try to merge two prompts from Pareto front if conditions are met."""
@@ -162,6 +168,7 @@ class GepaOptimizer:
             return False
 
         self._log_info(f"Merging prompts [{prompt1_idx}] and [{prompt2_idx}]")
+        print(f"  Generating merged prompt using LLM...")
 
         # Merge the two prompts
         merged_prompt = merger.merge(prompt1, prompt2)
@@ -171,7 +178,7 @@ class GepaOptimizer:
             return False
 
         # Evaluate merged prompt on VALIDATION set
-        merged_subscores = evaluator.evaluate_per_sentence(merged_prompt, val_sentences)
+        merged_subscores = evaluator.evaluate_per_sentence(merged_prompt, val_sentences, desc="validation")
         merged_score = sum(merged_subscores) / len(merged_subscores)
 
         # Update Pareto fronts with merged prompt

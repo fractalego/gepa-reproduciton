@@ -2,10 +2,13 @@ import random
 
 
 class ParetoHelper:
-    def __init__(self, base_prompt, sentences):
-        # Evaluate base prompt on all sentences
-        base_subscores = [0.0] * len(sentences)  # Placeholder scores
-
+    def __init__(self, base_prompt, sentences, base_subscores):
+        """
+        Args:
+            base_prompt: Initial prompt
+            sentences: Validation sentences
+            base_subscores: Scores for base prompt on each sentence
+        """
         self.prompt_candidates = [base_prompt]
         self.per_prompt_scores = [sum(base_subscores) / len(base_subscores)]
 

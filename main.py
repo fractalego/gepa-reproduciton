@@ -19,7 +19,7 @@ def main():
     # Load datasets
     print("Loading datasets...")
     train_sentences = load_sentences('data/PII_train.json')
-    val_sentences = load_sentences('data/PII_dev.json')[:5]  # Use only first 5 for testing
+    val_sentences = load_sentences('data/PII_dev.json')[:10]  # Use only first 10 for testing
 
     print(f"Train set: {len(train_sentences)} sentences")
     print(f"Validation set: {len(val_sentences)} sentences")

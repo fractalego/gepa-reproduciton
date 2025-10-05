@@ -41,21 +41,22 @@ class Evaluator:
                 "feedback": "Failed to parse evaluation response"
             }
 
-    def evaluate_per_sentence(self, prompt: str, sentences: list[str]) -> list[float]:
+    def evaluate_per_sentence(self, prompt: str, sentences: list[str], desc: str = "validation") -> list[float]:
         """
         Evaluate a prompt on sentences and return per-sentence scores.
 
         Args:
             prompt: The PII stripping prompt to evaluate
             sentences: List of sentences containing PII
+            desc: Description for logging (e.g., "validation", "train")
 
         Returns:
             List of scores (0.0 to 1.0) for each sentence
         """
-        print(f"  Evaluating {len(sentences)} sentences...")
+        print(f"  Evaluating on {desc} set ({len(sentences)} sentences)...")
         scores = []
 
-        for sentence in tqdm(sentences, desc="  Evaluating", leave=False):
+        for sentence in tqdm(sentences, desc=f"  {desc.capitalize()}", leave=False):
             # Run PII stripper model
             sanitized = self.model.run(prompt, sentence)
 
@@ -65,22 +66,23 @@ class Evaluator:
 
         return scores
 
-    def evaluate_with_traces(self, prompt: str, sentences: list[str]) -> dict[str, Any]:
+    def evaluate_with_traces(self, prompt: str, sentences: list[str], desc: str = "train") -> dict[str, Any]:
         """
         Evaluate a prompt and capture detailed traces for reflection.
 
         Args:
             prompt: The PII stripping prompt to evaluate
             sentences: List of sentences containing PII
+            desc: Description for logging (e.g., "train minibatch")
 
         Returns:
             Dict with 'scores', 'traces' containing detailed execution info
         """
-        print(f"  Evaluating {len(sentences)} sentences with traces...")
+        print(f"  Evaluating on {desc} set ({len(sentences)} sentences with traces)...")
         scores = []
         traces = []
 
-        for sentence in tqdm(sentences, desc="  Evaluating", leave=False):
+        for sentence in tqdm(sentences, desc=f"  {desc.capitalize()}", leave=False):
             # Run PII stripper model
             sanitized = self.model.run(prompt, sentence)
 

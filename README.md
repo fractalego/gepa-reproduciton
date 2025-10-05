@@ -1,7 +1,15 @@
 # GEPA: Prompt Optimization for PII Stripping
 
-This is an implementation of the GEPA algorithm for optimizing prompts to strip Personally Identifiable Information (PII) from text. GEPA uses evolutionary strategies combined with Pareto-based multi-objective optimization to evolve prompts through mutation and merging operations. The algorithm evaluates prompt performance across multiple validation examples, maintaining a Pareto frontier of non-dominated solutions, and uses LLM-based reflection to generate improved prompt variants. This implementation is based on the original GEPA framework available at [github.com/gepa-ai/gepa](https://github.com/gepa-ai/gepa/tree/main) and the paper ["Gradient-Free Optimization of Prompt Ensembles via Pareto Fronts"](https://arxiv.org/pdf/2507.19457).
+This is an implementation of the GEPA algorithm for optimizing prompts to strip Personally Identifiable Information (PII) from text. 
+GEPA uses evolutionary strategies combined with Pareto-based multi-objective optimization to evolve prompts through mutation and merging operations. 
+The algorithm evaluates prompt performance across multiple validation examples, maintaining a Pareto frontier of non-dominated solutions, and uses LLM-based reflection to generate improved prompt variants. 
+
+This implementation is based on the original GEPA framework available at [github.com/gepa-ai/gepa](https://github.com/gepa-ai/gepa/tree/main) and the paper ["Gradient-Free Optimization of Prompt Ensembles via Pareto Fronts"](https://arxiv.org/pdf/2507.19457).
+
 The data in the `data/` folder is synthetic and generated for demonstration purposes only. It does not contain real PII.
+
+This is only a toy example for educational purposes and is not intended for production use.
+More specifically, this task only has one type of score (PII removal accuracy), so the Pareto optimization aspect is not fully utilized.
 
 ## Key Concepts
 

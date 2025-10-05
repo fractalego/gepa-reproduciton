@@ -6,10 +6,12 @@ The algorithm evaluates prompt performance across multiple validation examples, 
 
 This implementation is based on the original GEPA framework available at [github.com/gepa-ai/gepa](https://github.com/gepa-ai/gepa/tree/main) and the paper ["Gradient-Free Optimization of Prompt Ensembles via Pareto Fronts"](https://arxiv.org/pdf/2507.19457).
 
-The data in the `data/` folder is synthetic and generated for demonstration purposes only. It does not contain real PII.
-
 This is only a toy example for educational purposes and is not intended for production use.
 More specifically, this task only has one type of score (PII removal accuracy), so the Pareto optimization aspect is not fully utilized.
+
+NOTE: 
+**The data in the `data/` folder is synthetic and generated for demonstration purposes only. It does not contain real PII.**
+
 
 ## Key Concepts
 

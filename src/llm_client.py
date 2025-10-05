@@ -1,5 +1,6 @@
 import os
 from openai import OpenAI
+from dotenv import load_dotenv
 
 
 class LLMClient:
@@ -12,6 +13,9 @@ class LLMClient:
         Args:
             model: OpenAI model name to use (default: gpt-4o-mini)
         """
+        # Load environment variables from .env file
+        load_dotenv()
+
         api_key = os.getenv("OPENAI_API_KEY")
         if not api_key:
             raise ValueError("OPENAI_API_KEY environment variable not set")

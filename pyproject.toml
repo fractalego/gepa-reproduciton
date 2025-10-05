@@ -1,7 +1,11 @@
 [project]
 name = "gepa"
 version = "0.1.0"
-description = "Add your description here"
+description = "GEPA-based prompt optimization for PII stripping"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "openai>=1.0.0",
+    "python-dotenv>=1.0.0",
+    "json-repair>=0.25.0",
+]
